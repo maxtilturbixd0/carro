@@ -1,340 +1,446 @@
 
-#carrito-flotante {
-    display: none; /* Oculto por defecto */
-    /* Aquí agregar los estilos para posicionar el carrito flotante */
-}
-*{
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&family=Titillium+Web:wght@200;300;400;600;700&display=swap');
+
+* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family:sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    cursor: url('img/emp1.png'), auto; /* Cambia 'emp1.png' por la ruta real de tu imagen */
 }
 
-:root{
-    --body-color: #eff0f1;
-    --sidebar-color: #FFF;
-    --primary-color: #232424;
-    --primary-color-light: #f0f0f1;
-    --toggle-color: #b4adad;
-    --text-color: #444343;
-
-    --tran-03: all 0.2s ease;
-    --tran-03: all 0.3s ease;
-    --tran-04: all 0.3s ease;
-    --tran-05: all 0.3s ease;
+/* Ajustes de header */
+header {
+    background: url('img/header.jpg') no-repeat center center;
+    background-size: cover;
+    height: 60vh; /* Altura para pantallas grandes */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-body{
-    min-height: 100vh;
-    background-color: var(--body-color);
-    transition: var(--tran-05);
-cursor: url('img/emp1.png'), auto; /* Cambia 'empanada.png' por la ruta real de tu imagen */
-        }
-
-a {
-            /* Cambia el puntero a una imagen de empanada cuando está sobre un enlace */
-            cursor: url('img/super.png'), pointer; /* Personaliza con la imagen que desees */
-        }
+@media screen and (max-width: 500px) {
+    header {
+        height: 150px; /* Altura fija más pequeña para dispositivos móviles */
+        background-size: cover;
+        background-position: center;
+    }
 }
 
-::selection{
-    background-color: var(--primary-color);
+header a {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 2.5em;
     color: #fff;
+    font-weight: bold;
+    /* Centramos el texto en el header */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-body.dark{
-    --body-color: #18191a;
-    --sidebar-color: #242526;
-    --primary-color: #3a3b3c;
-    --primary-color-light: #3a3b3c;
-    --toggle-color: #fff;
-    --text-color: #ccc;
+/* Ajuste del título para dispositivos móviles */
+@media screen and (max-width: 500px) {
+    header h1 {
+        font-size: 1.5em; /* Reduce el tamaño de la fuente en móviles */
+        padding: 10px; /* Ajusta el espaciado si es necesario */
+    }
 }
 
- .sidebar{
+/* Contenedor principal */
+.contenedor {
+    max-width: 1200px;
+    padding: 10px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    contain: paint;
+}
+
+.contenedor .contenedor-items {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-gap: 30px;
+    grid-row-gap: 30px;
+    width: 100%;
+    transition: .3s;
+}
+
+/* Estilos de los items */
+.contenedor .contenedor-items .item {
+    max-width: 200px;
+    margin: auto;
+    border: 1px solid #666;
+    border-radius: 10px;
+    padding: 20px;
+    transition: .3s;
+}
+
+.contenedor .contenedor-items .item .img-item {
+    width: 100%;
+}
+
+.contenedor .contenedor-items .item:hover {
+    box-shadow: 0 0 10px #666;
+    scale: 1.05;
+}
+
+.contenedor .contenedor-items .item .titulo-item {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.contenedor .contenedor-items .item .precio-item {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.contenedor .contenedor-items .item .boton-item {
+    display: block;
+    margin: 10px auto;
+    border: none;
+    background-color: black;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Sección carrito */
+.carrito {
+    border: 1px solid #666;
+    width: 35%;
+    margin-top: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: auto;
+    position: sticky !important;
+    top: 0;
+    transition: .3s;
+    margin-right: -100%;
+    opacity: 0;
+}
+
+.carrito .header-carrito {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.carrito .carrito-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid #666;
+    padding: 20px;
+}
+
+.carrito .carrito-item img {
+    margin-right: 20px;
+}
+
+.carrito .carrito-item .carrito-item-titulo {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.carrito .carrito-item .selector-cantidad {
+    display: inline-block;
+    margin-right: 25px;
+}
+
+.carrito .carrito-item .carrito-item-cantidad {
+    border: none;
+    font-size: 18px;
+    background-color: transparent;
+    display: inline-block;
+    width: 30px;
+    padding: 5px;
+    text-align: center;
+}
+
+.carrito .carrito-item .selector-cantidad i {
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.carrito .carrito-item .carrito-item-precio {
+    font-weight: bold;
+    display: inline-block;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.carrito .carrito-item .btn-eliminar {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #000;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #000;
+    cursor: pointer;
+    display: block;
+    background: transparent;
+    z-index: 20;
+}
+
+.carrito .carrito-item .btn-eliminar i {
+    pointer-events: none;
+}
+
+.carrito-total {
+    background-color: #f3f3f3;
+    padding: 30px;
+}
+
+.carrito-total .fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.carrito-total .btn-pagar {
+    display: block;
+    width: 100%;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.carrito-total .btn-pagar:hover {
+    scale: 1.05;
+}
+
+/* SECCIÓN RESPONSIVE */
+@media screen and (max-width: 850px) {
+    .contenedor {
+        display: block;
+    }
+    .contenedor-items {
+        width: 100% !important;
+    }
+    .carrito {
+        width: 100%;
+    }
+}
+
+/* Estilos para el contenedor del popup */
+.popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background: var(--sidebar-color);
-    transition: var(--tran-03);
-    z-index: 100;  
-}
-.sidebar.close{
-    width: 88px;
-}
-
-.sidebar li{
-    height: 50px;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.sidebar header .image,
-.sidebar .icon{
-    min-width: 60px;
-    border-radius: 6px;
-}
-
-.sidebar .icon{
-    min-width: 60px;
-    border-radius: 6px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-}
-
-.sidebar .text,
-.sidebar .icon{
-    color: var(--text-color);
-    transition: var(--tran-03);
-}
-
-.sidebar .text{
-    font-size: 17px;
-    font-weight: 500;
-    white-space: nowrap;
-    opacity: 1;
-}
-.sidebar.close .text{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Oscurece el fondo de la página */
+    z-index: 1000;
     opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.sidebar header{
+/* Estilos para el contenido del popup */
+.popup-content {
     position: relative;
+    width: 550px; /* Ajusta el ancho de la imagen según el tamaño deseado */
+    height: auto; /* Mantiene la proporción de la imagen */
+    animation: girar 0.8s ease forwards;
 }
 
-.sidebar header .image-text{
-    display: flex;
-    align-items: center;
-}
-.sidebar header .logo-text{
-    display: flex;
-    flex-direction: column;
-}
-header .image-text .name {
-    margin-top: 2px;
-    font-size: 18px;
-    font-weight: 600;
+/* Animación de giro */
+@keyframes girar {
+    from {
+        transform: rotateY(-180deg);
+        opacity: 0;
+    }
+    to {
+        transform: rotateY(-15deg);
+        opacity: 1;
+    }
 }
 
-header .image-text .profession{
-    font-size: 16px;
-    margin-top: -2px;
-    display: block;
+/* Estilo de la imagen dentro del popup */
+.popup-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Ajusta si quieres bordes redondeados */
+    box-shadow: none; /* Elimina cualquier contorno o sombra */
 }
 
-.sidebar header .image{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sidebar header .image img{
-    width: 40px;
-    border-radius: 6px;
-}
-
-.sidebar header .toggle{
+/* Botón de cierre */
+.popup-close {
     position: absolute;
-    top: 50%;
-    right: -25px;
-    transform: translateY(-50%) rotate(180deg);
-    height: 25px;
-    width: 25px;
-    background-color: var(--primary-color);
-    color: var(--sidebar-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
     cursor: pointer;
-    transition: var(--tran-05);
+    color: white; /* Asegura que sea visible sobre el fondo oscuro */
 }
 
-body.dark .sidebar header .toggle{
-    color: var(--text-color);
+
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
-.sidebar.close .toggle{
-    transform: translateY(-50%) rotate(0deg);
+.minimal-paypal-button {
+  background-color: #000; /* Color negro */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  animation: bounce 1s ease-in-out infinite; /* Animación de brinquito */
+  transition: background-color 0.3s;
 }
 
-.sidebar .menu{
-    margin-top: 40px;
+.minimal-paypal-button:hover {
+  background-color: #333; /* Color más claro al pasar el mouse */
 }
 
-.sidebar li.search-box{
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    cursor: pointer;
-    transition: var(--tran-05);
+
+
+
+/* Contenedor para centrar el campo de búsqueda */
+.search-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centra verticalmente el ícono */
+  margin: 20px auto; /* Ajusta el margen para centrar */
+  width: 100%; /* Usa todo el ancho disponible para centrar el contenido */
+  max-width: 750px; /* Ancho máximo en pantallas grandes */
 }
 
-.sidebar li.search-box input{
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    background-color: var(--primary-color-light);
-    color: var(--text-color);
-    border-radius: 6px;
-    font-size: 17px;
-    font-weight: 500;
-    transition: var(--tran-05);
-}
-.sidebar li a{
-    list-style: none;
-    height: 100%;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: var(--tran-03);
+
+
+/* Estilos minimalistas para el campo de búsqueda */
+#busqueda {
+  width: 100%; /* Se ajusta al ancho del contenedor */
+  padding: 10px 40px 10px 20px; /* Ajuste de padding para el icono */
+  font-size: 16px;
+  border: 3px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  transition: border 0.3s ease;
 }
 
-.sidebar li a:hover{
-    background-color: var(--primary-color);
-}
-.sidebar li a:hover .icon,
-.sidebar li a:hover .text{
-    color: var(--sidebar-color);
-}
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text{
-    color: var(--text-color);
+.input-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  cursor: pointer;
 }
 
-.sidebar .menu-bar{
-    height: calc(100% - 55px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow-y: scroll;
-}
-.menu-bar::-webkit-scrollbar{
-    display: none;
-}
-.sidebar .menu-bar .mode{
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    position: relative;
-    transition: var(--tran-05);
+/* Placeholder estilizado en cursiva y con color gris claro */
+#busqueda::placeholder {
+  color: #aaa;
+  font-style: italic;
 }
 
-.menu-bar .mode .sun-moon{
-    height: 50px;
+/* Efecto visual al hacer foco en el campo de búsqueda */
+#busqueda:focus {
+  border: 1px solid #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+
+
+
+
+/* Oculta el botón flotante por defecto en pantallas más grandes */
+#floating-cart {
+  display: none; /* Oculto en dispositivos de escritorio */
+}
+
+/* Estilos para el botón flotante de carrito en dispositivos móviles */
+@media (max-width: 768px) {
+  #floating-cart {
+    display: flex; /* Visible solo en móviles */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     width: 60px;
-}
-
-.mode .sun-moon i{
-    position: absolute;
-}
-.mode .sun-moon i.sun{
-    opacity: 0;
-}
-body.dark .mode .sun-moon i.sun{
-    opacity: 1;
-}
-body.dark .mode .sun-moon i.moon{
-    opacity: 0;
-}
-
-.menu-bar .bottom-content .toggle-switch{
-    position: absolute;
-    right: 0;
-    height: 100%;
-    min-width: 60px;
-    display: flex;
+    height: 60px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
+    font-size: 24px;
     cursor: pointer;
-}
-.toggle-switch .switch{
-    position: relative;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
-    transition: var(--tran-05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+
+  #floating-cart:hover {
+    background-color: #0056b3;
+  }
 }
 
-.switch::before{
-    content: '';
-    position: absolute;
-    height: 15px;
-    width: 15px;
+#floating-cart {
+    display: none; /* Oculto en dispositivos de escritorio y móviles inicialmente */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 24px;
+    padding: 10px;
     border-radius: 50%;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    background-color: var(--sidebar-color);
-    transition: var(--tran-04);
-}
-
-body.dark .switch::before{
-    left: 20px;
-}
-
-.home{
-    position: absolute;
-    top: 0;
-    top: 0;
-    left: 250px;
-    height: 100vh;
-    width: calc(100% - 150px);
-    background-color: var(--body-color);
-    transition: var(--tran-05);
-}
-.home .text{
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--text-color);
-    padding: 12px 60px;
-}
-
-.sidebar.close ~ .home{
-    left: 78px;
-    height: 100vh;
-    width: calc(100% - 78px);
-}
-body.dark .home .text{
-    color: var(--text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 1000;
 }
 
 
- #centrado {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Alinea la imagen hacia arriba */
-            height: 45vh; /* Opcional: ajusta la altura del contenedor según tus necesidades */
-        
-        }
-
- #comida1{
-        float: right;
-        width: 25%;
-        padding: 1px;
-
- }
- #comida2{
-        float: left;
-        width: 20%;
-        padding: 1px;
- }
-
-
-.underline {
-    text-decoration: underline;
-}
